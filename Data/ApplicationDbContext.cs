@@ -5,10 +5,8 @@ namespace GameLibrary.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){}
         public DbSet<Game> Games { get; set;}
+        public DbSet<Category> Categories { get; set;}
     }
 }

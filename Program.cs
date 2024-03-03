@@ -19,11 +19,13 @@ builder.Services.AddControllersWithViews();
 
 #region
 builder.Services.AddScoped<GameRepository, GameRepository>();
+builder.Services.AddScoped<CategoryRepository, CategoryRepository>();
 #endregion
 
 #region
-builder.Services.AddTransient<ApplicationDbContext, ApplicationDbContext>();
+
 builder.Services.AddTransient<IGameServices, GameService>();
+builder.Services.AddTransient<ICategoryServices, CategoryService>();
 #endregion
 
 var app = builder.Build();
@@ -49,7 +51,9 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Game}/{action=Index}/{id?}"); 
+// Meqe tek layouti i hoqem Home dhe Privacy, defauld route e vendosa tek controlleri Game dhe Actioni Index deri ne nje moment te dyte kur ta vendosim 
+// tek login ose nje faqe tjeter.
 app.MapRazorPages();
 
 app.Run();
