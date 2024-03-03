@@ -1,0 +1,188 @@
+﻿@model IEnumerable<GameLibrary.Data.Game>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
+
+
+<script>
+    // funksioni eshte i marre nga projekti i meparshem
+    function ChangeValue(id) {
+        $.ajax({
+            url: "/Game/ChangeIsForSale",
+            type: "Get",
+            data: { id: id }, // id e pare eshte emri i parametrit qe pritet ne controller.
+            success: function (data) {
+                alert("Hello");
+            },
+            error: function (data) {
+                alert("Bye");
+            }
+        });
+    }
+
+</script>
+
+
+
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequiredAge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleasedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinimumRequirements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedRequirements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsForSale)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequiredAge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleasedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinimumRequirements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecommendedRequirements)
+            </td>
+           
+             <td>
+
+                @if (@item.IsForSale) // ky kusht sherben qe te na tregoje qe ta ruaje switch toggle ne index dhe qe ta dime a e kemi te ruajtur ne database apo jo
+                {
+
+                    <label class="switch">
+                        <input type="checkbox" checked id="" onchange="ChangeValue('@item.Id') "> @*cojme si parameter ne funksionin e js id*@
+                        <span class="slider round"></span>
+                    </label>
+                }
+                else
+                {
+                    
+                    <label class="switch">
+                        <input type="checkbox" id="" onchange="ChangeValue('@item.Id')"> @*cojme si parameter ne funksionin e js id*@
+                        <span class="slider round"></span>
+                    </label>
+                }
+             </td>
+
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

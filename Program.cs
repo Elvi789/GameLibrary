@@ -1,4 +1,6 @@
 using GameLibrary.Data;
+using GameLibrary.Repository;
+using GameLibrary.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +15,16 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+
+#region
+builder.Services.AddScoped<GameRepository, GameRepository>();
+#endregion
+
+#region
+builder.Services.AddTransient<ApplicationDbContext, ApplicationDbContext>();
+builder.Services.AddTransient<IGameServices, GameService>();
+#endregion
 
 var app = builder.Build();
 

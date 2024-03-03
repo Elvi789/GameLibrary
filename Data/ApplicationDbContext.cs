@@ -9,5 +9,6 @@ namespace GameLibrary.Data
             : base(options)
         {
         }
+        public DbSet<Game> Games { get; set;}
     }
 }
