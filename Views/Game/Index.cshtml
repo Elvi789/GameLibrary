@@ -4,6 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
+
+@*
+    Kodi i meposhtem eshte marre ne CHat Gpt dhe sherben per dizajnin e CheckBox te property IsForSale.
+*@
 <style>
 
     .switch {
@@ -72,6 +76,7 @@
 
 <script>
     // funksioni eshte i marre nga projekti i meparshem
+    // sherben per te bere ajaxin e IsForSale toggle switch.
     function ChangeValue(id) {
         $.ajax({
             url: "/Game/ChangeIsForSale",
@@ -130,7 +135,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model) 
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -163,7 +169,7 @@
                 {
 
                     <label class="switch">
-                        <input type="checkbox" checked id="" onchange="ChangeValue('@item.Id') "> @*cojme si parameter ne funksionin e js id*@
+                        <input type="checkbox" checked  onchange="ChangeValue('@item.Id') "> @*cojme si parameter ne funksionin e js id*@ @*Vendoset checked qe te ruhet nqs eshte e ruajtur ne database*@
                         <span class="slider round"></span>
                     </label>
                 }
@@ -171,7 +177,8 @@
                 {
                     
                     <label class="switch">
-                        <input type="checkbox" id="" onchange="ChangeValue('@item.Id')"> @*cojme si parameter ne funksionin e js id*@
+                            <input type="checkbox" onchange="ChangeValue('@item.Id')"> @*cojme si parameter ne funksionin e js id*@ @*Nuk vendoset checked qe te ms ruhet nqs nuk eshte e ruajtur ne database*@
+                            <span class="slider round"></span>
                         <span class="slider round"></span>
                     </label>
                 }

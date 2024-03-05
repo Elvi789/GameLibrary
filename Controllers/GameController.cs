@@ -89,7 +89,7 @@ namespace GameLibrary.Controllers
             dto.Price = game.Price;
             dto.Id = game.Id;
             dto.RequiredAge = game.RequiredAge;
-            dto.ReleasedDate = DateTime.Today;
+            dto.ReleasedDate = DateTime.Now;
             dto.Description = game.Description;
 
             return View(dto);
@@ -109,7 +109,7 @@ namespace GameLibrary.Controllers
                 game.Title = dto.Title;
                 game.Price = dto.Price;
                 game.Description = dto.Description;
-                game.ReleasedDate = DateTime.Today;
+                game.ReleasedDate = DateTime.Now;
                 game.RequiredAge = dto.RequiredAge;
                 game.MinimumRequirements = dto.MinimumRequirements;
                 game.RecommendedRequirements = dto.RecommendedRequirements;

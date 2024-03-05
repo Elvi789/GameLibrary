@@ -8,7 +8,7 @@
         public int RequiredAge { get; set; }
         public int Price { get; set; }
 
-        public DateTime ReleasedDate { get; set; } = DateTime.Today;
+        public DateTime ReleasedDate { get; set; } = DateTime.Now;
 
         public string? MinimumRequirements { get; set; }
         public string? RecommendedRequirements { get; set; }
