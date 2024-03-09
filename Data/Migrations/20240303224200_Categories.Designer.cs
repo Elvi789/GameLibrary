@@ -4,6 +4,7 @@ using GameLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameLibrary.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240303224200_Categories")]
+    partial class Categories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,8 +25,6 @@ namespace GameLibrary.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("GameLibrary.Data.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -45,7 +46,6 @@ namespace GameLibrary.Data.Migrations
                     b.ToTable("Categories");
                 });
 
->>>>>>> bbf436b5263b3a80a4fe172ce114f1027fd665cd
             modelBuilder.Entity("GameLibrary.Data.Game", b =>
                 {
                     b.Property<int>("Id")
@@ -84,30 +84,6 @@ namespace GameLibrary.Data.Migrations
 
                     b.ToTable("Games");
                 });
-<<<<<<< HEAD
-
-            modelBuilder.Entity("GameLibrary.Data.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Notifications");
-                });
-=======
->>>>>>> bbf436b5263b3a80a4fe172ce114f1027fd665cd
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {

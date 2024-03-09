@@ -16,12 +16,27 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+<<<<<<< HEAD
 #region Repositories
 builder.Services.AddScoped<NotificationRepository, NotificationRepository>();
 #endregion
 #region Services
 builder.Services.AddTransient<INotificationService, NotificationService>();
 #endregion
+=======
+
+#region
+builder.Services.AddScoped<GameRepository, GameRepository>();
+builder.Services.AddScoped<CategoryRepository, CategoryRepository>();
+#endregion
+
+#region
+
+builder.Services.AddTransient<IGameServices, GameService>();
+builder.Services.AddTransient<ICategoryServices, CategoryService>();
+#endregion
+
+>>>>>>> bbf436b5263b3a80a4fe172ce114f1027fd665cd
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,7 +60,9 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Game}/{action=Index}/{id?}"); 
+// Meqe tek layouti i hoqem Home dhe Privacy, defauld route e vendosa tek controlleri Game dhe Actioni Index deri ne nje moment te dyte kur ta vendosim 
+// tek login ose nje faqe tjeter.
 app.MapRazorPages();
 
 app.Run();
