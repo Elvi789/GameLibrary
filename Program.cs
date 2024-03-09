@@ -1,4 +1,6 @@
 using GameLibrary.Data;
+using GameLibrary.Repository;
+using GameLibrary.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +16,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+#region Repositories
+builder.Services.AddScoped<NotificationRepository, NotificationRepository>();
+#endregion
+#region Services
+builder.Services.AddTransient<INotificationService, NotificationService>();
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
