@@ -30,6 +30,26 @@
         </dd>
     </dl>
 </div>
+
+@if (Model.CategoryGames != null && Model.CategoryGames.Any())
+{
+    <div>
+        <h4>Associated Games</h4>
+        <hr />
+        <dl class="row">
+            @foreach (var categoryGame in Model.CategoryGames)
+            {
+                <dt>Game Title</dt>
+                <dd>@categoryGame.Game.Title</dd>
+            }
+        </dl>
+    </div>
+}
+else
+{
+    <p>No games associated with this category.</p>
+}
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     

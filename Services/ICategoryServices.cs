@@ -9,5 +9,6 @@ namespace GameLibrary.Services
         Task CreateCategoryAsync(Category category);
         Task UpdateCategoriesAsync(Category category);
         Task DeleteCategoriesAsync(Category category);
+        Task<Category> DetailsCategoryByid(int id);
     }
 }

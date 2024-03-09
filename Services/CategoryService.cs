@@ -28,5 +28,10 @@ namespace GameLibrary.Services
         {
             await _catRepo.Delete(category);
         }
+
+        public async Task<Category> DetailsCategoryByid(int id)
+        {
+            return await _catRepo.GameCategoryDetailsByIdAsync(id);
+        }
     }
 }

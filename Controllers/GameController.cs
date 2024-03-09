@@ -8,9 +8,13 @@ namespace GameLibrary.Controllers
     public class GameController : Controller
     {
         private readonly IGameServices _gameServices;
-        public GameController(IGameServices gameServices)
+        private readonly ICategoryGameServices _categoryGameServices;
+        private readonly ICategoryServices _categoryServices;
+        public GameController(IGameServices gameServices, ICategoryGameServices categoryGameServices, ICategoryServices categoryServices)
         {
             _gameServices = gameServices;
+            _categoryGameServices = categoryGameServices;
+            _categoryServices = categoryServices;
         }
 
         public async Task<IActionResult >Index()
@@ -19,19 +23,20 @@ namespace GameLibrary.Controllers
             return View(games);
         }
 
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             GameForCreationDto game = new GameForCreationDto();
-
+            // Fill the model with categories
+            game.Categories = await _categoryServices.GetAllCategoriesAync();
             return View(game);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(GameForCreationDto dto)
         {
-           if(dto == null)
+            if (dto == null)
             {
                 return NotFound();
             }
@@ -39,7 +44,6 @@ namespace GameLibrary.Controllers
             Game game = new Game
             {
                 Title = dto.Title,
-                
                 Price = dto.Price,
                 Description = dto.Description,
                 ReleasedDate = dto.ReleasedDate,
@@ -49,12 +53,28 @@ namespace GameLibrary.Controllers
             };
 
             await _gameServices.CreateGame(game);
+
+            if (dto.CategoryIds != null && dto.CategoryIds.Any())
+            {
+                foreach (var categoryId in dto.CategoryIds)
+                {
+                    var catGame = new CategoryGame()
+                    {
+                        GameId = game.Id,
+                        CategoryId = categoryId,
+                    };
+
+                    await _categoryGameServices.CreateCategoryGameAsync(catGame);
+                }
+            }
+
             return RedirectToAction("Index");
         }
 
+
         public async Task<IActionResult> Details(int id)
         {
-            var itemToShowDetails = await _gameServices.GetGameById(id);
+            var itemToShowDetails = await _gameServices.DetailsGameByid(id);
 
 
             if (itemToShowDetails == null)
@@ -67,8 +87,14 @@ namespace GameLibrary.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var itemToDelete = await _gameServices.GetGameById(id);
-           
+            var itemToDelete = await _gameServices.DetailsGameByid(id);
+            var allRelationships = await _categoryGameServices.GetAllCategoryGamesAsync();
+            var relationshipsToDelete = allRelationships.Where(x => x.Id == id);
+            foreach (var relationship in relationshipsToDelete)
+            {
+                await _categoryGameServices.DeleteCategoryGameAsync(relationship);
+            }
+
 
 
             await _gameServices.DeleteGame(itemToDelete);

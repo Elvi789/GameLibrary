@@ -14,6 +14,12 @@ namespace GameLibrary.Repository
 
         // ketu do te implementojme te gjithe logjiken e kodit qe do te jete e nevojshme qe te implementohet vetem per Game Entity
         // prandaj tani per tani eshte bosh
+
+
+        public async Task<Game> GameCategoryDetailsByIdAsync(int id)
+        {
+            return await _context.Games.Include(c => c.CategoryGames).ThenInclude(cg => cg.Category).FirstOrDefaultAsync(c => c.Id == id); 
+        }
        
     }
 }

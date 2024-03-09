@@ -1,4 +1,6 @@
-﻿namespace GameLibrary.Models
+﻿using GameLibrary.Data;
+
+namespace GameLibrary.Models
 {
     public class GameForCreationDto
     {
@@ -14,5 +16,9 @@
         public string? RecommendedRequirements { get; set; }
 
         public bool IsForSale { get; set; }
+
+        public List<int>? CategoryIds { get; set; }
+        public IEnumerable<Category>? Categories { get; set; }
+        // keto behen per lidhjen n me n te game me categories
     }
 }

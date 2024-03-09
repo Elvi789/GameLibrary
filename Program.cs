@@ -20,12 +20,14 @@ builder.Services.AddControllersWithViews();
 #region
 builder.Services.AddScoped<GameRepository, GameRepository>();
 builder.Services.AddScoped<CategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<CategoryGameRepository, CategoryGameRepository>();
 #endregion
 
 #region
 
 builder.Services.AddTransient<IGameServices, GameService>();
 builder.Services.AddTransient<ICategoryServices, CategoryService>();
+builder.Services.AddTransient<ICategoryGameServices, CategoryGameService>();
 #endregion
 
 var app = builder.Build();

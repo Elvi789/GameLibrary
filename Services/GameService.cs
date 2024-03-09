@@ -33,5 +33,12 @@ namespace GameLibrary.Services
         {
             await _gameRepo.Delete(game);
         }
+
+
+
+        public async Task<Game> DetailsGameByid(int id)
+        {
+            return await _gameRepo.GameCategoryDetailsByIdAsync(id);
+        }
     }
 }

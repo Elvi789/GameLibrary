@@ -9,6 +9,6 @@ namespace GameLibrary.Services
         Task CreateGame(Game game);
         Task EditGame(Game game); 
         Task DeleteGame(Game game);
-
+        Task<Game> DetailsGameByid(int id);
     }
 }
