@@ -4,6 +4,7 @@ using GameLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameLibrary.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240308180532_notification")]
+    partial class notification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,56 +25,6 @@ namespace GameLibrary.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-<<<<<<< HEAD
-=======
-            modelBuilder.Entity("GameLibrary.Data.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-<<<<<<< HEAD
-            modelBuilder.Entity("GameLibrary.Data.CategoryGame", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("GameId");
-
-                    b.ToTable("CategoryGames");
-                });
-
-=======
->>>>>>> bbf436b5263b3a80a4fe172ce114f1027fd665cd
->>>>>>> 87171a5a36829294ead1454c55393b1dd0becf7c
             modelBuilder.Entity("GameLibrary.Data.Game", b =>
                 {
                     b.Property<int>("Id")
@@ -110,7 +63,6 @@ namespace GameLibrary.Data.Migrations
 
                     b.ToTable("Games");
                 });
-<<<<<<< HEAD
 
             modelBuilder.Entity("GameLibrary.Data.Notification", b =>
                 {
@@ -132,8 +84,6 @@ namespace GameLibrary.Data.Migrations
 
                     b.ToTable("Notifications");
                 });
-=======
->>>>>>> bbf436b5263b3a80a4fe172ce114f1027fd665cd
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -337,25 +287,6 @@ namespace GameLibrary.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GameLibrary.Data.CategoryGame", b =>
-                {
-                    b.HasOne("GameLibrary.Data.Category", "Category")
-                        .WithMany("CategoryGames")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GameLibrary.Data.Game", "Game")
-                        .WithMany("CategoryGames")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Game");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -405,16 +336,6 @@ namespace GameLibrary.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("GameLibrary.Data.Category", b =>
-                {
-                    b.Navigation("CategoryGames");
-                });
-
-            modelBuilder.Entity("GameLibrary.Data.Game", b =>
-                {
-                    b.Navigation("CategoryGames");
                 });
 #pragma warning restore 612, 618
         }

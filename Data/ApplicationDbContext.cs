@@ -5,9 +5,18 @@ namespace GameLibrary.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+<<<<<<< HEAD
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+=======
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){}
         public DbSet<Game> Games { get; set;}
         public DbSet<Category> Categories { get; set;}
+<<<<<<< HEAD
         public DbSet<CategoryGame> CategoryGames { get; set;}
 
 
@@ -31,5 +40,8 @@ namespace GameLibrary.Data
 
             base.OnModelCreating(builder);
         }
+=======
+>>>>>>> bbf436b5263b3a80a4fe172ce114f1027fd665cd
+>>>>>>> 87171a5a36829294ead1454c55393b1dd0becf7c
     }
 }

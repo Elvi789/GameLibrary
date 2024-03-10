@@ -16,6 +16,14 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+<<<<<<< HEAD
+#region Repositories
+builder.Services.AddScoped<NotificationRepository, NotificationRepository>();
+#endregion
+#region Services
+builder.Services.AddTransient<INotificationService, NotificationService>();
+#endregion
+=======
 
 #region
 builder.Services.AddScoped<GameRepository, GameRepository>();
@@ -30,6 +38,7 @@ builder.Services.AddTransient<ICategoryServices, CategoryService>();
 builder.Services.AddTransient<ICategoryGameServices, CategoryGameService>();
 #endregion
 
+>>>>>>> bbf436b5263b3a80a4fe172ce114f1027fd665cd
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
