@@ -11,11 +11,11 @@ namespace GameLibrary.Data
 
         // lidhja n me n e game me category do te krijohet nepermjet injuction table CategoryGame.
         [ForeignKey("GameId")]
-        public int GameId {  get; set; }
+        public int? GameId {  get; set; }
         public virtual Game? Game { get; set; }
 
         [ForeignKey("CategoryId")]
-        public int CategoryId {  get; set; }
+        public int? CategoryId {  get; set; }
         public virtual Category? Category { get; set; }
     }
 }

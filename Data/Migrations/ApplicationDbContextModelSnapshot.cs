@@ -22,8 +22,7 @@ namespace GameLibrary.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-<<<<<<< HEAD
-=======
+
             modelBuilder.Entity("GameLibrary.Data.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -45,7 +44,7 @@ namespace GameLibrary.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-<<<<<<< HEAD
+
             modelBuilder.Entity("GameLibrary.Data.CategoryGame", b =>
                 {
                     b.Property<int>("Id")
@@ -69,9 +68,7 @@ namespace GameLibrary.Data.Migrations
                     b.ToTable("CategoryGames");
                 });
 
-=======
->>>>>>> bbf436b5263b3a80a4fe172ce114f1027fd665cd
->>>>>>> 87171a5a36829294ead1454c55393b1dd0becf7c
+
             modelBuilder.Entity("GameLibrary.Data.Game", b =>
                 {
                     b.Property<int>("Id")
@@ -110,7 +107,7 @@ namespace GameLibrary.Data.Migrations
 
                     b.ToTable("Games");
                 });
-<<<<<<< HEAD
+
 
             modelBuilder.Entity("GameLibrary.Data.Notification", b =>
                 {
@@ -132,8 +129,7 @@ namespace GameLibrary.Data.Migrations
 
                     b.ToTable("Notifications");
                 });
-=======
->>>>>>> bbf436b5263b3a80a4fe172ce114f1027fd665cd
+
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
