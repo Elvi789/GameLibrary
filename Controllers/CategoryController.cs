@@ -36,11 +36,11 @@ namespace GameLibrary.Controllers
         public async Task<IActionResult> Create(CategoryForCreationDto dto)
         {
             Category category = new Category()
-            {
+            { 
                 Name = dto.Name,
                 Description = dto.Description
             };
-
+               
             await _catservices.CreateCategoryAsync(category);
             return RedirectToAction("Index");
         }
@@ -76,8 +76,7 @@ namespace GameLibrary.Controllers
             var category = await _catservices.DetailsCategoryByid(id);
             return View(category);
         }
-
-
+         
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {

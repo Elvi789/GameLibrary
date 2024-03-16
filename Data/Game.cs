@@ -21,5 +21,7 @@ namespace GameLibrary.Data
 
         // per te bere lidhjen n me n te category me games duhet te perdorim tabelen ndihmese dhe ketu marrim nje liste me ate tabele 
         public ICollection<CategoryGame>? CategoryGames { get; set; }
+
+        public ICollection<Discount>? Discounts { get; set;}
     }
 }

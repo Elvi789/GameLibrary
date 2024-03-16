@@ -29,6 +29,7 @@ builder.Services.AddTransient<INotificationService, NotificationService>();
 builder.Services.AddScoped<GameRepository, GameRepository>();
 builder.Services.AddScoped<CategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<CategoryGameRepository, CategoryGameRepository>();
+builder.Services.AddScoped<DiscountRepository, DiscountRepository>();
 #endregion
 
 #region
@@ -36,6 +37,7 @@ builder.Services.AddScoped<CategoryGameRepository, CategoryGameRepository>();
 builder.Services.AddTransient<IGameServices, GameService>();
 builder.Services.AddTransient<ICategoryServices, CategoryService>();
 builder.Services.AddTransient<ICategoryGameServices, CategoryGameService>();
+builder.Services.AddTransient<IDiscountServices, DiscountService>();
 #endregion
 
 
@@ -68,3 +70,4 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+

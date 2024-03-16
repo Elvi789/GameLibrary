@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GameLibrary.Data.Migrations
+namespace GameLibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -21,7 +21,6 @@ namespace GameLibrary.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
 
             modelBuilder.Entity("GameLibrary.Data.Category", b =>
                 {
@@ -44,7 +43,6 @@ namespace GameLibrary.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-
             modelBuilder.Entity("GameLibrary.Data.CategoryGame", b =>
                 {
                     b.Property<int>("Id")
@@ -53,10 +51,10 @@ namespace GameLibrary.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GameId")
+                    b.Property<int?>("GameId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -68,6 +66,42 @@ namespace GameLibrary.Data.Migrations
                     b.ToTable("CategoryGames");
                 });
 
+            modelBuilder.Entity("GameLibrary.Data.Discount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsFixedAmount")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPercentage")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("PercentageAmount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Usages")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("Discounts");
+                });
 
             modelBuilder.Entity("GameLibrary.Data.Game", b =>
                 {
@@ -108,7 +142,6 @@ namespace GameLibrary.Data.Migrations
                     b.ToTable("Games");
                 });
 
-
             modelBuilder.Entity("GameLibrary.Data.Notification", b =>
                 {
                     b.Property<int>("Id")
@@ -129,7 +162,6 @@ namespace GameLibrary.Data.Migrations
 
                     b.ToTable("Notifications");
                 });
-
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -337,17 +369,22 @@ namespace GameLibrary.Data.Migrations
                 {
                     b.HasOne("GameLibrary.Data.Category", "Category")
                         .WithMany("CategoryGames")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("GameLibrary.Data.Game", "Game")
                         .WithMany("CategoryGames")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GameId");
 
                     b.Navigation("Category");
+
+                    b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("GameLibrary.Data.Discount", b =>
+                {
+                    b.HasOne("GameLibrary.Data.Game", "Game")
+                        .WithMany("Discounts")
+                        .HasForeignKey("GameId");
 
                     b.Navigation("Game");
                 });
@@ -411,6 +448,8 @@ namespace GameLibrary.Data.Migrations
             modelBuilder.Entity("GameLibrary.Data.Game", b =>
                 {
                     b.Navigation("CategoryGames");
+
+                    b.Navigation("Discounts");
                 });
 #pragma warning restore 612, 618
         }

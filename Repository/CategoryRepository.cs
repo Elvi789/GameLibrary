@@ -11,7 +11,7 @@ namespace GameLibrary.Repository
         public CategoryRepository(ApplicationDbContext context) : base(context) { _context = context; }
 
 
-
+        
 
 
         // Nese do te na duhet ndonje metode e gatshme dhe specifike rreth category do ta shtojme ne kete file, ne te kundert te gjitha 
