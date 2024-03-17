@@ -17,7 +17,7 @@ namespace GameLibrary.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Discount> discounts = await _discountServices.GetAllDiscountsAsync();
+            IEnumerable<Discount> discounts = await _discountServices.GetAllDiscountsGameIncludedAsync();
             return View(discounts);
         }
         [HttpGet]

@@ -9,7 +9,7 @@ namespace GameLibrary.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){}
         public DbSet<Game> Games { get; set; }
         public DbSet<Notification> Notifications { get; set; }
-//        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){}
+
 
         public DbSet<Category> Categories { get; set;}
 
