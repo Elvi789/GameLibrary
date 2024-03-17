@@ -9,7 +9,7 @@ namespace GameLibrary.Services
         Task DeleteDiscountAsync(Discount discount);
         Task EditDiscountAsync(Discount discount);
         Task CreateDiscountAsync(Discount discount);
-
+        Task<List<Discount>> GetAllDiscountsGameIncludedAsync();
 
     }
 }

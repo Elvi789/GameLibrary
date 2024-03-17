@@ -35,5 +35,10 @@ namespace GameLibrary.Services
         {
             _repository.Add(discount);
         }
+
+        public async Task<List<Discount>> GetAllDiscountsGameIncludedAsync()
+        {
+            return await _repository.GetAllDiscountsGameIncludedAsync();
+        }
     }
 }

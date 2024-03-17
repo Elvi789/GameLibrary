@@ -3,10 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GameLibrary.Data
 {
-    public class CategoryGame
+    public class CategoryGame : BaseEntity
     {
-        [Key]
-        public int Id {  get; set; }
+      
 
 
         // lidhja n me n e game me category do te krijohet nepermjet injuction table CategoryGame.

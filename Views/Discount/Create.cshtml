@@ -1,0 +1,77 @@
+﻿@model GameLibrary.Models.DiscountForCreationDto
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>DiscountForCreationDto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" class="form-control" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Usages" class="control-label"></label>
+                <input asp-for="Usages" class="form-control" />
+                <span asp-validation-for="Usages" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PercentageAmount" class="control-label"></label>
+                <input asp-for="PercentageAmount" class="form-control" />
+                <span asp-validation-for="PercentageAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsPercentage" /> @Html.DisplayNameFor(model => model.IsPercentage)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsFixedAmount" /> @Html.DisplayNameFor(model => model.IsFixedAmount)
+                </label>
+            </div>
+          @*   <div class="form-group">
+                <label asp-for="GameId" class="control-label"></label>
+                <input asp-for="GameId" class="form-control" />
+                <span asp-validation-for="GameId" class="text-danger"></span>
+            </div> *@
+
+            <div class="form-group">
+                <label asp-for="GameId" class="control-label">Category</label>
+                <select asp-for="GameId"  class="js-example-basic-multiple" style="width: 100%;">
+                    <option value="0">Choose a Game</option>
+                    @if (Model.Games != null)
+                    {
+                        @foreach (var item in Model.Games)
+                        {
+                            <option value="@item.Id">@item.Title</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
