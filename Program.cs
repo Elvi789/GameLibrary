@@ -17,27 +17,25 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 
-#region Repositories
-builder.Services.AddScoped<NotificationRepository, NotificationRepository>();
-#endregion
-#region Services
-builder.Services.AddTransient<INotificationService, NotificationService>();
-#endregion
 
 
-#region
+#region Scoped
 builder.Services.AddScoped<GameRepository, GameRepository>();
 builder.Services.AddScoped<CategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<CategoryGameRepository, CategoryGameRepository>();
 builder.Services.AddScoped<DiscountRepository, DiscountRepository>();
+builder.Services.AddScoped<NotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<ReviewRepository, ReviewRepository>();
 #endregion
 
-#region
+#region Transient
 
 builder.Services.AddTransient<IGameServices, GameService>();
 builder.Services.AddTransient<ICategoryServices, CategoryService>();
 builder.Services.AddTransient<ICategoryGameServices, CategoryGameService>();
 builder.Services.AddTransient<IDiscountServices, DiscountService>();
+builder.Services.AddTransient<INotificationService, NotificationService>();
+builder.Services.AddTransient<IReviewServices, ReviewService>();
 #endregion
 
 

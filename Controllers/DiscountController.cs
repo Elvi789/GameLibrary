@@ -39,7 +39,6 @@ namespace GameLibrary.Controllers
                 PercentageAmount = dto.PercentageAmount,
                 IsPercentage = dto.IsPercentage,
                 GameId = dto.GameId,
-
             };
 
             await _discountServices.CreateDiscountAsync(discount);

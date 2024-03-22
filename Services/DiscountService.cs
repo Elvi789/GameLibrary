@@ -33,7 +33,7 @@ namespace GameLibrary.Services
 
         public async Task CreateDiscountAsync(Discount discount)
         {
-            _repository.Add(discount);
+            await _repository.Add(discount);
         }
 
         public async Task<List<Discount>> GetAllDiscountsGameIncludedAsync()

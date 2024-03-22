@@ -15,6 +15,7 @@ namespace GameLibrary.Data
 
         public DbSet<CategoryGame> CategoryGames { get; set;}
         public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GameLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class discount : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -252,6 +252,25 @@ namespace GameLibrary.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReviewValue = table.Column<float>(type: "real", nullable: false),
+                    GameId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -305,7 +324,13 @@ namespace GameLibrary.Migrations
                 name: "IX_Discounts_GameId",
                 table: "Discounts",
                 column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_GameId",
+                table: "Reviews",
+                column: "GameId");
         }
+
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -332,6 +357,9 @@ namespace GameLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "Notifications");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

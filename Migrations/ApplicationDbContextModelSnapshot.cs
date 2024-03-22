@@ -163,6 +163,27 @@ namespace GameLibrary.Migrations
                     b.ToTable("Notifications");
                 });
 
+            modelBuilder.Entity("GameLibrary.Data.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("ReviewValue")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -389,6 +410,15 @@ namespace GameLibrary.Migrations
                     b.Navigation("Game");
                 });
 
+            modelBuilder.Entity("GameLibrary.Data.Review", b =>
+                {
+                    b.HasOne("GameLibrary.Data.Game", "Game")
+                        .WithMany("Reviews")
+                        .HasForeignKey("GameId");
+
+                    b.Navigation("Game");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -450,6 +480,8 @@ namespace GameLibrary.Migrations
                     b.Navigation("CategoryGames");
 
                     b.Navigation("Discounts");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

@@ -17,7 +17,7 @@ namespace GameLibrary.Controllers
             _categoryServices = categoryServices;
         }
 
-        public async Task<IActionResult >Index()
+        public async Task<IActionResult> Index()
         {
             var games = await _gameServices.GetAllGames();
             return View(games);

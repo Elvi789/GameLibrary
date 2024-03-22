@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GameLibrary.Data
 {
@@ -22,5 +23,7 @@ namespace GameLibrary.Data
         public ICollection<CategoryGame>? CategoryGames { get; set; }
 
         public ICollection<Discount>? Discounts { get; set;}
+
+        public ICollection<Review>? Reviews { get; set; }
     }
 }
