@@ -1,0 +1,212 @@
+﻿@model IEnumerable<GameLibrary.Data.Card>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <style>
+        /* Add your CSS here */
+        body {
+            background: #fff; /* White background for the page */
+            font-family: 'Arial', sans-serif; /* Change font */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 20px; /* Adjusted top margin */
+        }
+
+        .card {
+            height: 240px; /* Increased height for better spacing */
+            width: 380px; /* Adjusted width */
+            background: linear-gradient(to right, #f85032, #e73827); /* Gradient background with red-ish tones */
+            border-radius: 15px; /* Slightly rounded corners */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Improved shadow */
+            margin: 20px; /* Increased margin */
+            position: relative;
+            overflow: hidden; /* Hide overflow content */
+            color: #fff; /* Text color */
+        }
+
+        .card__figure--logo {
+            width: 120px; /* Adjusted logo width */
+            position: absolute;
+            top: 20px; /* Increased top spacing */
+            left: 20px; /* Increased left spacing */
+        }
+
+        .card__reader {
+            width: 50px;
+            height: 40px;
+            background: radial-gradient(#d9a56c, #b18457);
+            border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            right: 20px; /* Increased right spacing */
+            transform: translateY(-50%);
+            overflow: hidden;
+        }
+
+        .card__reader--risk {
+            width: 50px;
+            height: 40px;
+            border-radius: 13px;
+            background: transparent;
+            border: 1px solid #666;
+            position: absolute;
+            z-index: 0;
+        }
+
+        .card__reader--risk-one {
+            transform: translate(37px, 15px);
+        }
+
+        .card__reader--risk-two {
+            transform: translate(15px, 30px);
+        }
+
+        .card__reader--risk-three {
+            transform: translate(-37px, -15px);
+        }
+
+        .card__reader--risk-four {
+            transform: translate(-15px, -30px);
+        }
+
+        .card__number {
+            font-size: 1.2em; /* Increased font size */
+            font-weight: bold; /* Bold font weight */
+            letter-spacing: 2px;
+            text-align: center;
+            margin-top: 130px; /* Adjusted margin */
+            position: relative;
+        }
+
+        .card__dates {
+            position: absolute;
+            bottom: 20px; /* Adjusted bottom spacing */
+            left: 20px; /* Adjusted left spacing */
+        }
+
+        .card__dates span {
+            font-size: 0.9em;
+            font-weight: bold; /* Bold font weight */
+            margin-right: 10px; /* Increased right margin */
+        }
+
+        .card__name {
+            font-size: 1.1em; /* Increased font size */
+            font-weight: bold; /* Bold font weight */
+            letter-spacing: 1px;
+            position: absolute;
+            bottom: 20px; /* Adjusted bottom spacing */
+            left: 20px; /* Adjusted left spacing */
+        }
+
+        .card__cvv {
+            font-size: 0.9em; /* Adjusted font size */
+            position: absolute;
+            bottom: 20px; /* Adjusted bottom spacing */
+            right: 20px; /* Adjusted right spacing */
+        }
+
+        .card__flag {
+            position: absolute;
+            bottom: 20px; /* Adjusted bottom spacing */
+            right: 20px; /* Adjusted right spacing */
+        }
+
+        .assign {
+            text-align: center;
+            margin-top: 20px; /* Increased top margin */
+            color: #888; /* Adjusted text color */
+            font-size: 0.8em;
+        }
+
+        .assign a {
+            text-decoration: none;
+            color: #444; /* Adjusted link color */
+        }
+
+        .assign a:hover {
+            color: #666; /* Adjusted link hover color */
+        }
+
+        .create-button {
+            padding: 10px 20px;
+            background-color: #f85032; /* Red-ish background color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .create-button:hover {
+            background-color: #e73827; /* Darker red-ish background color on hover */
+        }
+
+        .create-button:active {
+            background-color: #d32e18; /* Even darker red-ish background color when active */
+        }
+
+        .card:hover {
+            transform: scale(1.05); /* Increase size on hover */
+            transition: transform 0.3s ease; /* Smooth transition */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+        }
+
+        .card-link {
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Inherit color */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <a href="@Url.Action("Details", "Card", new { id = item.Id })" class="card-link">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.mmlinwujfsmjs3GYXZD7jQHaF7?rs=1&pid=ImgDetMain" class="card__figure--logo"> <!-- Replace URL_OF_ALBANIAN_BKT_BANK_LOGO with actual logo URL -->
+                    <div class="card__reader">
+                        <div class="card__reader--risk card__reader--risk-one"></div>
+                        <div class="card__reader--risk card__reader--risk-two"></div>
+                        <div class="card__reader--risk card__reader--risk-three"></div>
+                        <div class="card__reader--risk card__reader--risk-four"></div>
+                    </div>
+                    <p class="card__number" style="margin-top: 150px">@item.CardNumber</p>
+                    <div class="card__dates">
+                        <span class="card__dates--first">@item.ExpireDate.ToString("MM/yy")</span>
+                    </div>
+                    <p class="card__name">@item.CardHolder</p>
+                    <p class="card__cvv">CVV: @item.Cvv</p> <!-- Display CVV -->
+                    <div class="card__flag">
+                        <div class="card__flag--globe"></div>
+                        <div class="card__flag--red"></div>
+                        <div class="card__flag--yellow"></div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+    <a class="create-button" asp-action="Create">Create New</a>
+</body>
+
+</html>
+

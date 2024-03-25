@@ -1,7 +1,9 @@
 ﻿using GameLibrary.Data;
 using GameLibrary.Models;
 using GameLibrary.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace GameLibrary.Controllers
 {
@@ -10,11 +12,13 @@ namespace GameLibrary.Controllers
         private readonly IGameServices _gameServices;
         private readonly ICategoryGameServices _categoryGameServices;
         private readonly ICategoryServices _categoryServices;
+ 
         public GameController(IGameServices gameServices, ICategoryGameServices categoryGameServices, ICategoryServices categoryServices)
         {
             _gameServices = gameServices;
             _categoryGameServices = categoryGameServices;
             _categoryServices = categoryServices;
+           
         }
 
         public async Task<IActionResult> Index()
@@ -40,7 +44,7 @@ namespace GameLibrary.Controllers
             {
                 return NotFound();
             }
-
+           
             Game game = new Game
             {
                 Title = dto.Title,
@@ -49,7 +53,9 @@ namespace GameLibrary.Controllers
                 ReleasedDate = dto.ReleasedDate,
                 RequiredAge = dto.RequiredAge,
                 MinimumRequirements = dto.MinimumRequirements,
-                RecommendedRequirements = dto.RecommendedRequirements
+                RecommendedRequirements = dto.RecommendedRequirements,
+                // nga gjithe userat qe menaxhohen merr userin me id te Userit te loguar
+               
             };
 
             await _gameServices.CreateGame(game);

@@ -26,6 +26,7 @@ builder.Services.AddScoped<CategoryGameRepository, CategoryGameRepository>();
 builder.Services.AddScoped<DiscountRepository, DiscountRepository>();
 builder.Services.AddScoped<NotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<ReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<CardRepository, CardRepository>();
 #endregion
 
 #region Transient
@@ -36,6 +37,7 @@ builder.Services.AddTransient<ICategoryGameServices, CategoryGameService>();
 builder.Services.AddTransient<IDiscountServices, DiscountService>();
 builder.Services.AddTransient<INotificationService, NotificationService>();
 builder.Services.AddTransient<IReviewServices, ReviewService>();
+builder.Services.AddTransient<ICardServices, CardService>();
 #endregion
 
 
