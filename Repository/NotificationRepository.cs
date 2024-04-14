@@ -1,4 +1,5 @@
 ﻿using GameLibrary.Data;
+using GameLibrary.Repository.Pagination;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameLibrary.Repository
@@ -33,6 +34,12 @@ namespace GameLibrary.Repository
             var notification = await _context.Notifications.FindAsync(id);
             _context.Notifications.Remove(notification);
             await _context.SaveChangesAsync();
+        }
+        public async Task<PaginatedList<Notification>> GetPaginatedNotification(int page = 1, int pageSize = 10)
+        {
+            var notResult = _context.Notifications.OrderByDescending(x => x.Id).AsQueryable();
+            var notification = await PaginatedList<Notification>.CreateAsync(notResult, page, pageSize);
+            return notification;
         }
     }
 }

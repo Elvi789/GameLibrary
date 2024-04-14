@@ -18,9 +18,11 @@ namespace GameLibrary.Controllers
             _gameServices = gameServices; 
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page =1 )
         {
-            var categories = await _catservices.GetAllCategoriesAync();
+            int rows = 10;
+            ViewBag.Page = page;
+            var categories = await _catservices.GetPaginatedCategories(page,rows);
             return View(categories);
         }
 

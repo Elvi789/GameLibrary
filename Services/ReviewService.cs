@@ -1,5 +1,6 @@
 ﻿using GameLibrary.Data;
 using GameLibrary.Repository;
+using GameLibrary.Repository.Pagination;
 
 namespace GameLibrary.Services
 {
@@ -10,7 +11,10 @@ namespace GameLibrary.Services
         {
             _reviewRepository = reviewRepository;
         }
-
+        public async Task<PaginatedList<Review>> GetPaginatedReviews(int page = 1, int pageSize = 10)
+        {
+            return await _reviewRepository.GetPaginatedReview(page, pageSize);
+        }
         public async Task<List<Review>> GetAllReviewsAsync()
         {
             return await _reviewRepository.GetAll();

@@ -1,4 +1,4 @@
-﻿@model GameLibrary.Repository.Pagination.PaginatedList<GameLibrary.Data.Category>
+﻿@model GameLibrary.Repository.Pagination.PaginatedList<GameLibrary.Data.Card>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,10 +14,20 @@
         <tr>
            
             <th>
-                Name
+                Card Number
             </th>
             <th>
-                Description
+               CVV
+            </th>
+            <th>
+               Amount
+            </th>
+            <th>
+                Card Holder
+            </th>
+            
+            <th>
+                Created By
             </th>
             <th></th>
         </tr>
@@ -26,13 +36,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.CardNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CVV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardHolder)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.CreatedBy)
             </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

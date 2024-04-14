@@ -1,4 +1,5 @@
 ﻿using GameLibrary.Data;
+using GameLibrary.Repository.Pagination;
 
 namespace GameLibrary.Services
 {
@@ -10,5 +11,6 @@ namespace GameLibrary.Services
         Task EditGame(Game game); 
         Task DeleteGame(Game game);
         Task<Game> DetailsGameByid(int id);
+        Task<PaginatedList<Game>> GetPaginatedGames(int page = 1, int pageSize = 10);
     }
 }

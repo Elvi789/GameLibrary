@@ -1,6 +1,7 @@
 ﻿using GameLibrary.Data;
 using GameLibrary.Models;
 using GameLibrary.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameLibrary.Controllers
@@ -10,16 +11,21 @@ namespace GameLibrary.Controllers
         private readonly IGameServices _gameServices;
         private readonly ICategoryGameServices _categoryGameServices;
         private readonly ICategoryServices _categoryServices;
+
+       
         public GameController(IGameServices gameServices, ICategoryGameServices categoryGameServices, ICategoryServices categoryServices)
         {
             _gameServices = gameServices;
             _categoryGameServices = categoryGameServices;
             _categoryServices = categoryServices;
+            //_userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var games = await _gameServices.GetAllGames();
+            int rows = 10;
+            ViewBag.Page = page;
+            var games = await _gameServices.GetPaginatedGames(page, rows);
             return View(games);
         }
 
@@ -49,7 +55,8 @@ namespace GameLibrary.Controllers
                 ReleasedDate = dto.ReleasedDate,
                 RequiredAge = dto.RequiredAge,
                 MinimumRequirements = dto.MinimumRequirements,
-                RecommendedRequirements = dto.RecommendedRequirements
+                RecommendedRequirements = dto.RecommendedRequirements,
+                CreatedBy = "",
             };
 
             await _gameServices.CreateGame(game);

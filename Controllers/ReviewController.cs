@@ -15,9 +15,11 @@ namespace GameLibrary.Controllers
             _gameServices = gameServices;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var reviews = await _reviewServices.GetAllReviewsWithGames();
+            int rows = 10;
+            ViewBag.Page = page;
+            var reviews = await _reviewServices.GetPaginatedReviews(page,rows);
             return View(reviews);
         }
 

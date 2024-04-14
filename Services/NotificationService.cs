@@ -1,5 +1,7 @@
 ﻿using GameLibrary.Data;
 using GameLibrary.Repository;
+using GameLibrary.Repository.Pagination;
+using NuGet.Protocol.Core.Types;
 using static GameLibrary.Services.NotificationService;
 
 namespace GameLibrary.Services
@@ -9,8 +11,11 @@ namespace GameLibrary.Services
         {
             public NotificationRepository _notifRepo;
             public NotificationService(NotificationRepository notifRepo) { _notifRepo = notifRepo; }
-
-            public async Task<Notification> GetNotificationById(int id)
+        public async Task<PaginatedList<Notification>> GetPaginatedNotifications(int page = 1, int pageSize = 10)
+        {
+            return await _notifRepo.GetPaginatedNotification(page, pageSize);
+        }
+        public async Task<Notification> GetNotificationById(int id)
             {
                 return await _notifRepo.GetNotificationId(id);
             }

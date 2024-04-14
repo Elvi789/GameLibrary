@@ -1,5 +1,6 @@
 ﻿using GameLibrary.Data;
 using GameLibrary.Repository;
+using GameLibrary.Repository.Pagination;
 
 namespace GameLibrary.Services
 {
@@ -9,6 +10,10 @@ namespace GameLibrary.Services
         public DiscountService(DiscountRepository repository)
         {
             _repository = repository;
+        }
+        public async Task<PaginatedList<Discount>> GetPaginatedDiscounts(int page = 1, int pageSize = 10)
+        {
+            return await _repository.GetPaginatedDiscount(page, pageSize);
         }
 
         public async Task<List<Discount>> GetAllDiscountsAsync()

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GameLibrary.Data.Review>
+﻿@model GameLibrary.Repository.Pagination.PaginatedList<GameLibrary.Data.Review>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,14 +12,12 @@
 <table class="table">
     <thead>
         <tr>
+           
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                ReviewValue
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReviewValue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Game)
+                Game
             </th>
            
             <th></th>
@@ -46,4 +44,27 @@
         </tr>
 }
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="12">
+                <div class="text-right">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       class="btn btn-outline-success @prevDisabled">
+                        Previous
+                    </a>
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       class="btn btn-outline-success @nextDisabled">
+                        Next
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
 </table>

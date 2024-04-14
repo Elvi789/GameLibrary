@@ -1,4 +1,5 @@
 ﻿using GameLibrary.Data;
+using GameLibrary.Repository.Pagination;
 
 namespace GameLibrary.Services
 {
@@ -10,5 +11,6 @@ namespace GameLibrary.Services
         Task DeleteReviewAsync(Review review);
         Task EditReviewAsync(Review review);
         Task<List<Review>> GetAllReviewsWithGames();
+        Task<PaginatedList<Review>> GetPaginatedReviews(int page = 1, int pageSize = 10);
     }
 }

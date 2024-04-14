@@ -13,9 +13,11 @@ namespace GameLibrary.Controllers
         {
             _notifServices = notification;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var notifications = await _notifServices.GetAllNotifications();
+            int rows = 10;
+            ViewBag.Page = page;
+            var notifications = await _notifServices.GetPaginatedNotifications(page,rows);
             return View(notifications);
         }
 

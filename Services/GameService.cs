@@ -1,5 +1,6 @@
 ﻿using GameLibrary.Data;
 using GameLibrary.Repository;
+using GameLibrary.Repository.Pagination;
 
 namespace GameLibrary.Services
 {
@@ -8,6 +9,10 @@ namespace GameLibrary.Services
         public readonly GameRepository _gameRepo;
         public GameService(GameRepository gameRepo) { _gameRepo = gameRepo; }
 
+        public async Task<PaginatedList<Game>> GetPaginatedGames(int page= 1, int pageSize = 10)
+        {
+            return await _gameRepo.GetPaginatedGame(page, pageSize);
+        }
         public async Task<Game> GetGameById(int id)
         {
             return await _gameRepo.GetById(id);

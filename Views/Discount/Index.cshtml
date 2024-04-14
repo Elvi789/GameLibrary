@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GameLibrary.Data.Discount>
+﻿@model GameLibrary.Repository.Pagination.PaginatedList<GameLibrary.Data.Discount>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,29 +13,27 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Code)
+                Code
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Usages)
+                Usages
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
+                Amount
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PercentageAmount)
+                Percentage Amount
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsPercentage)
+                Is Percentage
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsFixedAmount)
+                Is Fixed Amount
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game)
+                Game
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -74,4 +72,27 @@
         </tr>
 }
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="12">
+                <div class="text-right">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       class="btn btn-outline-success @prevDisabled">
+                        Previous
+                    </a>
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       class="btn btn-outline-success @nextDisabled">
+                        Next
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
 </table>

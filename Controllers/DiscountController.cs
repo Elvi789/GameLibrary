@@ -15,9 +15,11 @@ namespace GameLibrary.Controllers
             _discountServices = discountServices;
             _gameServices = gameServices;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page =1)
         {
-            IEnumerable<Discount> discounts = await _discountServices.GetAllDiscountsGameIncludedAsync();
+            int rows = 10;
+            ViewBag.Page = page;
+            IEnumerable<Discount> discounts = await _discountServices.GetPaginatedDiscounts(page, rows);
             return View(discounts);
         }
         [HttpGet]

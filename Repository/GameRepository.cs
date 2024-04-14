@@ -1,4 +1,5 @@
 ﻿using GameLibrary.Data;
+using GameLibrary.Repository.Pagination;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameLibrary.Repository
@@ -11,6 +12,12 @@ namespace GameLibrary.Repository
             _context = context;
         }
 
+        public async Task<PaginatedList<Game>> GetPaginatedGame(int page = 1, int pageSize = 10)
+        {
+            var gameResult = _context.Games.OrderByDescending(x => x.Id).AsQueryable();
+            var game = await PaginatedList<Game>.CreateAsync(gameResult, page, pageSize);
+            return game;
+        }
 
         // ketu do te implementojme te gjithe logjiken e kodit qe do te jete e nevojshme qe te implementohet vetem per Game Entity
         // prandaj tani per tani eshte bosh

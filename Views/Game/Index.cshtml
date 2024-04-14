@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GameLibrary.Data.Game>
+﻿@model GameLibrary.Repository.Pagination.PaginatedList<GameLibrary.Data.Game>
 
 @{
     ViewData["Title"] = "Index";
@@ -105,31 +105,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+               Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Description
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RequiredAge)
+               Required Age
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+               Price
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReleasedDate)
+                Released Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MinimumRequirements)
+                Minimum Requirements
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RecommendedRequirements)
+                Recommended Requirements
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsForSale)
+                Is For Sale
             </th>
             <th></th>
         </tr>
@@ -192,4 +192,27 @@
         </tr>
 }
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="12">
+                <div class="text-right">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       class="btn btn-outline-success @prevDisabled">
+                        Previous
+                    </a>
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       class="btn btn-outline-success @nextDisabled">
+                        Next
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
 </table>
