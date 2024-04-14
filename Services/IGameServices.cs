@@ -11,6 +11,6 @@ namespace GameLibrary.Services
         Task EditGame(Game game); 
         Task DeleteGame(Game game);
         Task<Game> DetailsGameByid(int id);
-        Task<PaginatedList<Game>> GetPaginatedGames(int page = 1, int pageSize = 10);
+        Task<PaginatedList<Game>> GetPaginatedGames(string emri, int page = 1, int pageSize = 10);
     }
 }

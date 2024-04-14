@@ -9,9 +9,9 @@ namespace GameLibrary.Services
         public readonly GameRepository _gameRepo;
         public GameService(GameRepository gameRepo) { _gameRepo = gameRepo; }
 
-        public async Task<PaginatedList<Game>> GetPaginatedGames(int page= 1, int pageSize = 10)
+        public async Task<PaginatedList<Game>> GetPaginatedGames(string emri , int page= 1, int pageSize = 10)
         {
-            return await _gameRepo.GetPaginatedGame(page, pageSize);
+            return await _gameRepo.GetPaginatedGame(emri, page, pageSize);
         }
         public async Task<Game> GetGameById(int id)
         {

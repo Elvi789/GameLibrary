@@ -40,7 +40,8 @@ namespace GameLibrary.Controllers
             Category category = new Category()
             { 
                 Name = dto.Name,
-                Description = dto.Description
+                Description = dto.Description,
+                CreatedBy = " ",
             };
                
             await _catservices.CreateCategoryAsync(category);

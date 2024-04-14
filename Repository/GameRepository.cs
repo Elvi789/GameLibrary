@@ -12,9 +12,14 @@ namespace GameLibrary.Repository
             _context = context;
         }
 
-        public async Task<PaginatedList<Game>> GetPaginatedGame(int page = 1, int pageSize = 10)
+        public async Task<PaginatedList<Game>> GetPaginatedGame(string emri, int page = 1, int pageSize = 10)
         {
             var gameResult = _context.Games.OrderByDescending(x => x.Id).AsQueryable();
+           
+            if (!string.IsNullOrEmpty(emri))
+            {
+                gameResult = _context.Games.Where(x => x.Title == emri);
+            }
             var game = await PaginatedList<Game>.CreateAsync(gameResult, page, pageSize);
             return game;
         }

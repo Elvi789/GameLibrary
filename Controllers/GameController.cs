@@ -21,11 +21,11 @@ namespace GameLibrary.Controllers
             //_userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index( string emri, int page = 1)
         {
             int rows = 10;
             ViewBag.Page = page;
-            var games = await _gameServices.GetPaginatedGames(page, rows);
+            var games = await _gameServices.GetPaginatedGames(emri, page, rows);
             return View(games);
         }
 
